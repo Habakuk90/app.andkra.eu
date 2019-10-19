@@ -2,8 +2,8 @@ language: node_js
 node_js:
   - 11
 cache:
-  - npm
-  - node_modules
+  - directories:
+    - node_modules
 before_script:
   - npm install
 script:
