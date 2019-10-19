@@ -1,0 +1,7 @@
+<app-header [navigation]="navigation" [tags]="tags"></app-header>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<app-footer (footerHeight)="setBodyHeight($event)"></app-footer>

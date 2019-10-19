@@ -1,0 +1,31 @@
+@import '../_mixins/add-by-property';
+@import '../_mixins/display-grid';
+@import '../1atom/a-mixins';
+@import '../2molecule/m-mixins';
+@import '../3organism/o-mixins';
+@import '../4template/t-mixins';
+@import '../5page/p-mixins';
+
+@mixin icon($icon, $pseudo: before) {
+  &::#{$pseudo} {
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: $icon;
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media #{$medium-up} {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media #{$small-only} {
+    @content;
+  }
+}

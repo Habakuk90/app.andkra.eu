@@ -1,0 +1,17 @@
+.a-label {
+  cursor: inherit;
+
+  &--checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0 auto;
+    font-size: 27px;
+
+    @include icon("\f067") {
+      transition: transform 0.3s ease-in-out;
+      padding-right: 16px;
+    }
+  }
+}

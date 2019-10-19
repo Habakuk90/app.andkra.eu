@@ -1,0 +1,28 @@
+.o-nav {
+  height: 100%;
+
+  &__list {
+    height: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+
+    &--burger {
+      @extend .o-nav__list !optional;
+      width: 200px;
+      height: 400px;
+      flex-flow: column nowrap;
+      li {
+        z-index: 1;
+      }
+    }
+
+    > li {
+      display: inline-block;
+      list-style-type: none;
+      height: 100%;
+      min-width: 80px;
+      cursor: pointer;
+    }
+  }
+}

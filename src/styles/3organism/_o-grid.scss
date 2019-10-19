@@ -1,0 +1,24 @@
+.o-grid {
+  $this: &;
+  margin: 0 -8px;
+  list-style: none;
+
+  &__element {
+    min-height: 200px;
+    margin: 0 8px;
+
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  &.-centered-v {
+    align-content: center;
+    justify-content: center;
+  }
+}
+
+@mixin IE-10 {
+  @media all and (-ms-high-contrast:none) {
+    @content;
+  }
+}

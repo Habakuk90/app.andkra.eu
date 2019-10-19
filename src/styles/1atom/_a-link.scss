@@ -1,0 +1,45 @@
+// TODOANDI: research if possible without these imports in angular component
+@import "0base/colors";
+
+$link-color: $black !default;
+$link-hover-color: $black !default;
+
+.a-link {
+  text-decoration: none;
+  color: $link-color;
+  cursor: pointer;
+  // needed everywhere? fixes underline hover
+  display: inline-block;
+  position: relative;
+
+  > a {
+    display: block;
+  }
+
+  &:active {
+    color: inherit;
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &:hover {
+    color: inherit;
+  }
+
+  &::before {
+    content: "";
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: $link-hover-color;
+    transition: 300ms;
+    position: absolute;
+    bottom: 0;
+  }
+
+  &:hover:before {
+    width: 100%;
+  }
+}

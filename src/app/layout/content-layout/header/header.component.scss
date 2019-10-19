@@ -1,0 +1,79 @@
+@import "0base/colors";
+@import "0base/mixins";
+@import "variables";
+
+@import "burger.scss";
+
+// TODOANDI: double declaration of o-nav styles. global and scoped angular.
+// @import '../../styles/3organism/o-nav';
+$nav-box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, 0.16);
+
+:host {
+  // header {
+  //   visibility: hidden;
+  // }
+
+  // &.active {
+  //   header {
+  //     visibility: visible;
+
+  //   }
+  // }
+  header {
+    background-color: $white;
+    box-shadow: $nav-box-shadow;
+    height: $nav-height;
+  }
+
+  .m-list {
+    &__item {
+      padding: 10px;
+      text-align: center;
+      transition: color 0.25s linear;
+      color: $black;
+      position: relative;
+      top: 1px;
+
+      &:hover {
+        color: $color-main-prim;
+      }
+
+      &:first-child {
+        // margin-right: auto;
+        padding-left: 0;
+      }
+
+      // &:last-child {
+      //   padding-right: 0;
+      // }
+    }
+  }
+}
+
+.anonymous:after {
+  content: "anonymous";
+  font-size: 12px;
+  position: relative;
+  top: -15px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 25px;
+  padding: 3px;
+}
+
+.burger {
+  $this: &;
+  &__icon {
+    @include burger(25px, 3px, 5px, #fff);
+
+    @include burger-top {
+      content: "\f00d";
+    }
+  }
+
+  &.isOpened {
+    #{$this}__icon {
+      @include burger-to-cross;
+    }
+  }
+}
