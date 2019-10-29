@@ -90,7 +90,4 @@ export class GhostService extends ApiService {
   }
 
 
-  // private toBeDefined() {
-  //   super.http.get(environment.signalR.baseUrl)
-  // }
 }

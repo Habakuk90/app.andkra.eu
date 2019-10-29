@@ -15,7 +15,7 @@ export class ChatHubConnection extends BaseHubConnection {
 
   onMethods = ChatConnectionOn;
 
-  constructor(name: string, public readonly route = 'chath') {
+  constructor(name: string, public readonly route = 'chat') {
     super(name, route);
   }
 
