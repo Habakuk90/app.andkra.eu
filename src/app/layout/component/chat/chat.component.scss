@@ -16,6 +16,16 @@
     display: flex;
     flex-flow: column;
     height: 100%;
+
+    #close-button {
+      position: absolute;
+      display: block;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+      padding: 10px 15px;
+      border: 1px solid black;
+    }
   }
 
   &__message-box {

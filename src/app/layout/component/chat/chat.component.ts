@@ -13,12 +13,17 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
   public message = '';
   public history: Array<string> = [];
   public hub: ChatHubConnection;
+
   constructor(private element: ElementRef) {
     this.nativeElement = this.element.nativeElement as HTMLElement;
   }
 
   public get isOpen() {
     return this.nativeElement.classList.contains('open');
+  }
+
+  public get isOnline() {
+    return this.hub.isConnected.value;
   }
 
   @HostListener('click', ['$event'])
@@ -28,12 +33,11 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
     }
   }
 
-  onInput(event: Event) {
-
-  }
-
   onSubmit(event: Event) {
-    this.hub.broadcastMessage(this.message);
+    if (this.message !== '') {
+      this.hub.broadcastMessage(this.message);
+
+    }
   }
 
 
@@ -44,7 +48,8 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
     this.registerOnMethods();
     this.hub.isConnected.subscribe(isConnected => {
       if (isConnected) {
-        this.hub.broadcastMessage('#dings connected with id:' + this.hub.getId()  );
+
+        this.hub.broadcastMessage('#dings connected with id:' + this.hub.getId());
       }
     }, error => {
       console.log(error);

@@ -1,12 +1,15 @@
 <div class="chat">
   <ng-template #collapsed>
     <div class="chat__small">
-      Start messaging
+      Status: <span class="icon-status">{{isOnline}}</span>
     </div>
   </ng-template>
 
   <div class="chat__open" *ngIf="isOpen;else collapsed">
-    <span class="icon-close" id="close-button">X</span>
+    <div class="icon-bar">
+        <span class="icon-close" id="close-button">X</span>
+        <span></span>
+    </div>
     <div class="chat__message-box">
       <ol>
         <li *ngFor="let item of history; trackById">
