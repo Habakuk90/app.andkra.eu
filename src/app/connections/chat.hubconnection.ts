@@ -1,25 +1,25 @@
 import { BaseHubConnection } from 'src/app/connections/base.hubconnection';
 
-enum ChatConnectionInvoke {
+enum HubMethods {
   BroadcastMessage = 'BroadcastMessage'
 }
 
-enum ChatConnectionOn {
+enum ClientMethods {
   SendMessage = 'SendMessage'
 }
 
 export class ChatHubConnection extends BaseHubConnection {
   connectionMethods: object;
 
-  invokeMethdos = ChatConnectionInvoke;
+  invokeMethdos = HubMethods;
 
-  onMethods = ChatConnectionOn;
+  onMethods = ClientMethods;
 
   constructor(name: string, public readonly route = 'chat') {
     super(name, route);
   }
 
-  public sendAll(...args: any[]): Promise<any> {
+  public broadcastMessage(...args: any[]): Promise<any> {
     return this.getConnection().invoke(this.invokeMethdos.BroadcastMessage, ...args);
   }
 

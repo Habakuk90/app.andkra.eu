@@ -18,7 +18,8 @@ export interface HubComponent {
 enum BaseConnMethods {
   JoinGroup = 'JoinGroup',
   LeaveGroup = 'LeaveGroup',
-  AddCurrentUser = 'AddCurrentUser'
+  AddCurrentUser = 'AddCurrentUser',
+  LogClient = 'LogClient'
 }
 
 export abstract class BaseHubConnection implements IBaseHubConnection {
@@ -38,14 +39,20 @@ export abstract class BaseHubConnection implements IBaseHubConnection {
   protected getConnection(): HubConnection {
     return this.connection;
   }
-
+public getId(): string {
+return this.connection.connectionId;
+}
   public async startConnection(): Promise<void> {
     try {
       await this.connection.start();
       this.isConnected.next(true);
+      // TODO: enable this only for development
+      this.logClient((x) => {
+        console.log(x);
+      });
     } catch (err) {
       this.isConnected.next(false);
-      // error handling disconnect / reconnect / logout
+      // TODO: error handling disconnect / reconnect / logout
       throw new Error(err);
     }
   }
@@ -74,6 +81,10 @@ export abstract class BaseHubConnection implements IBaseHubConnection {
 
   public addCurrentUser(...args: any[]): Promise<any> {
     return this.getConnection().invoke(BaseConnMethods.AddCurrentUser, ...args);
+  }
+
+  public logClient(method: (...args: any[]) => void) {
+    this.getConnection().on(BaseConnMethods.LogClient, method);
   }
 
   protected off(methodName: string): void {

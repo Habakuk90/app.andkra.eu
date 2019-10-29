@@ -1,0 +1,25 @@
+<div class="chat">
+  <ng-template #collapsed>
+    <div class="chat__small">
+      Start messaging
+    </div>
+  </ng-template>
+
+  <div class="chat__open" *ngIf="isOpen;else collapsed">
+    <span class="icon-close" id="close-button">X</span>
+    <div class="chat__message-box">
+      <ol>
+        <li *ngFor="let item of history; trackById">
+          {{item}}
+        </li>
+      </ol>
+    </div>
+    <div class="chat__input">
+          <form id="search" (ngSubmit)="onSubmit(form)" novalidate #form='ngForm'>
+              <input class="a-input" type="text" name="message" id="message-input"
+              [value]="message" (input)="message = $event.target.value" />
+              <input id="message-submit" type="submit" value="" />
+          </form>
+    </div>
+  </div>
+</div>

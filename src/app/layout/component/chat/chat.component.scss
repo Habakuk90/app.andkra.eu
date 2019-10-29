@@ -1,0 +1,54 @@
+.chat {
+  // width: 100vw;
+  // height: 100vh;
+  $this: &;
+  // &__container {
+  position: fixed;
+  z-index: 2;
+  background-color: white;
+  bottom: 0;
+  right: 0;
+  height: 100px;
+  width: 300px;
+  box-shadow: -4px -3px 8px -3px rgba(17, 17, 17, 0.16);
+  // }
+  &__open {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+  }
+
+  &__message-box {
+    flex-grow: 1;
+  }
+
+  &__input {
+    height: 50px;
+
+    form {
+      height: 100%;
+      display: flex;
+      flex-flow: row nowrap;
+
+      #message-submit {
+        width: 80px;
+      }
+
+      input {
+        height: 100%;
+        width: 100%;
+        border: none;
+        box-shadow: 0px -3px 8px -3px rgba(17, 17, 17, 0.16);
+      }
+    }
+  }
+  // applying on host, because we are usng ElementRef in component
+  @at-root :host {
+    &.open {
+      #{$this} {
+        height: 500px;
+        width: 100%;
+      }
+    }
+  }
+}

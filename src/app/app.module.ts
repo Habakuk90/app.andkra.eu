@@ -10,6 +10,7 @@ import { HeaderComponent } from './layout/content-layout/header/header.component
 import { FooterComponent } from './layout/content-layout/footer/footer.component';
 import { PageNotFoundComponent } from './layout/content-layout/page-not-found/page-not-found.component';
 import { ModalModule } from './shared/modals/modal.module';
+import { ChatComponent } from './layout/component/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ModalModule } from './shared/modals/modal.module';
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

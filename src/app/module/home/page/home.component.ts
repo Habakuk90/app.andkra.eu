@@ -9,6 +9,7 @@ import { Observable, Subscription } from 'rxjs';
 import { take, map, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { HubFactory } from 'src/app/connections/hub.factory';
+import { ChatHubConnection } from 'src/app/connections/chat.hubconnection';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ import { HubFactory } from 'src/app/connections/hub.factory';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy, HubComponent {
-  hub: HomeHubConnection;
+  hub: ChatHubConnection;
   page: IResponse;
   title: string;
   protected slug$: Observable<string>;
@@ -30,16 +31,6 @@ export class HomeComponent implements OnInit, OnDestroy, HubComponent {
   public get userName() { return this.userService.currentUserName; }
 
   ngOnInit() {
-    this.hub = new HubFactory('name').createConnection(HomeHubConnection);
-
-    // fix me, have to call it in every HubComponent
-    this.registerOnMethods();
-    this.hub.isConnected.subscribe(isConnected => {
-      if (isConnected) {
-        this.hub.sendAll('got options');
-      }
-    });
-
     this.slug$ = this.route.paramMap.pipe(map(params => (params.get('slug'))));
     this.slug$.pipe(take(1)).subscribe(slug => this.get(slug));
 
@@ -61,10 +52,8 @@ export class HomeComponent implements OnInit, OnDestroy, HubComponent {
 
   ngOnDestroy() {
     // fix me, have to call it in every HubComponent
-    this.hub.stopConnection();
   }
 
   registerOnMethods() {
-    this.hub.onSendMessage(y => console.log(y));
   }
 }
