@@ -14,7 +14,7 @@ export class HomeHubConnection extends BaseHubConnection {
 
   onMethods = HomeConnectionOn;
 
-  constructor(name: string, public readonly route = 'chath') {
+  constructor(name: string, public readonly route = 'chat') {
     super(name, route);
   }
 
