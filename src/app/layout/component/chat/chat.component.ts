@@ -2,8 +2,8 @@ import { Component, OnInit, ElementRef, OnDestroy, OnChanges } from '@angular/co
 import { HubComponent } from 'src/app/connections/base.hubconnection';
 import { ChatHubConnection } from 'src/app/connections/chat.hubconnection';
 import { HubFactory } from 'src/app/connections/hub.factory';
-import { AlertModal, IModal2, ModalBuilder } from 'src/app/shared/modals/modal';
 import { ModalService } from 'src/app/shared/modals/modal.service';
+import { AlertModal } from 'src/app/shared/modals/modal';
 
 @Component({
   selector: 'app-chat',
@@ -26,7 +26,6 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
 
   public set isOpen(value: boolean) {
     const classList = this.nativeElement.classList;
-
     if (value) {
       classList.add('open');
     } else {
@@ -38,14 +37,21 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
     return this.hub.isConnected.value;
   }
 
-  dismissChat() {
-    // this.modalService.openModal2(new AlertModal());
+  isDismissed = false;
+  dismissChat(event: Event) {
+    // prevent opening chat
+    event.stopPropagation();
 
-    this.nativeElement.classList.remove('open');
-    alert('closed');
+    // unregister remove stuff that is depenent on the chat.
+    this.isDismissed = true;
     this.hub.stopConnection().then(() => {
     });
+
+    // open new moda
+    this.modalService.openModal(new AlertModal());
+
   }
+
   onSubmit() {
     if (this.message !== '') {
       this.hub.broadcastMessage(this.message);

@@ -1,8 +1,8 @@
-<div class="chat">
+<div class="chat" *ngIf="!isDismissed">
   <ng-template #collapsed>
     <div class="chat--collapsed" (click)="isOpen = true">
-      <div class="chat__dismiss" (click)="dismissChat()" id="close-chat">
-        <span class="icon-close">X</span>
+      <div class="chat__dismiss" (click)="dismissChat($event)" id="close-chat">
+        <span class="icon-close"></span>
         <p>
             Dismiss the chat forever, you wont be able to join the chat any more. You will have to reload in order to reconecct
         </p>
@@ -15,7 +15,7 @@
 
   <div class="chat--expanded" *ngIf="isOpen; else collapsed">
     <div class="icon-bar">
-      <span class="icon-close" (click)="isOpen = false" id="collapse-chat">X</span>
+      <span class="icon-close" (click)="isOpen = false" id="collapse-chat"></span>
       <span></span>
     </div>
     <div class="chat__message-box">

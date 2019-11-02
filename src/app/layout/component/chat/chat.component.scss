@@ -1,3 +1,5 @@
+@import '0base/mixins';
+
 .chat {
   $this: &;
 
@@ -25,8 +27,9 @@
       right: 0;
       top: 0;
       cursor: pointer;
-      padding: 10px 15px;
-      border: 1px solid black;
+      font-size: 40px;
+      top: -6px;
+
     }
 
     form {
@@ -89,4 +92,8 @@
       }
     }
   }
+}
+.icon-close {
+  cursor: pointer;
+  @include icon("\f410");
 }

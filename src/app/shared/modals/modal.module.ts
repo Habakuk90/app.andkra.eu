@@ -5,6 +5,7 @@ import { WaitingModalComponent } from './waiting/modal.waiting.component';
 import { DeclinedModalComponent } from './declined/modal.declined.component';
 import { GameOverModalComponent } from './gameOver/modal.gameover.component';
 import { SharedModule } from '../shared.module';
+import { ModalService } from './modal.service';
 
 @NgModule({
   imports: [SharedModule],
@@ -14,6 +15,7 @@ import { SharedModule } from '../shared.module';
     DeclinedModalComponent,
     GameOverModalComponent
   ],
+  providers: [ModalService],
   exports: [ModalComponent]
 })
 export class ModalModule { }
