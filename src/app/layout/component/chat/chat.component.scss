@@ -1,8 +1,6 @@
 .chat {
-  // width: 100vw;
-  // height: 100vh;
   $this: &;
-  // &__container {
+
   position: fixed;
   z-index: 2;
   background-color: white;
@@ -11,13 +9,17 @@
   height: 100px;
   width: 300px;
   box-shadow: -4px -3px 8px -3px rgba(17, 17, 17, 0.16);
-  // }
-  &__open {
+
+  &--expanded {
     display: flex;
     flex-flow: column;
     height: 100%;
 
-    #close-button {
+    #{$this}__message-box {
+      flex-grow: 1;
+    }
+
+    #collapse-chat {
       position: absolute;
       display: block;
       right: 0;
@@ -26,17 +28,10 @@
       padding: 10px 15px;
       border: 1px solid black;
     }
-  }
-
-  &__message-box {
-    flex-grow: 1;
-  }
-
-  &__input {
-    height: 50px;
 
     form {
-      height: 100%;
+      height: 50px;
+
       display: flex;
       flex-flow: row nowrap;
 
@@ -49,6 +44,39 @@
         width: 100%;
         border: none;
         box-shadow: 0px -3px 8px -3px rgba(17, 17, 17, 0.16);
+      }
+    }
+  }
+
+  &--collapsed {
+    height: 100%;
+
+    #{$this}__dismiss {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      transition: all 1s linear;
+      transition-property: top;
+      p {
+        position: relative;
+        visibility: hidden;
+        display: none;
+      }
+
+      &:hover {
+        top: -100px;
+        width: 100%;
+        height: 100%;
+        background-color: red;
+
+        p {
+          visibility: visible;
+          display: block;
+        }
+        .icon-close {
+          display: none;
+        }
       }
     }
   }

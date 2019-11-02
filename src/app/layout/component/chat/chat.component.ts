@@ -1,7 +1,9 @@
-import { Component, OnInit, ElementRef, HostListener, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, OnDestroy, OnChanges } from '@angular/core';
 import { HubComponent } from 'src/app/connections/base.hubconnection';
 import { ChatHubConnection } from 'src/app/connections/chat.hubconnection';
 import { HubFactory } from 'src/app/connections/hub.factory';
+import { AlertModal, IModal2, ModalBuilder } from 'src/app/shared/modals/modal';
+import { ModalService } from 'src/app/shared/modals/modal.service';
 
 @Component({
   selector: 'app-chat',
@@ -14,7 +16,7 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
   public history: Array<string> = [];
   public hub: ChatHubConnection;
 
-  constructor(private element: ElementRef) {
+  constructor(private element: ElementRef, private modalService: ModalService) {
     this.nativeElement = this.element.nativeElement as HTMLElement;
   }
 
@@ -22,27 +24,36 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
     return this.nativeElement.classList.contains('open');
   }
 
+  public set isOpen(value: boolean) {
+    const classList = this.nativeElement.classList;
+
+    if (value) {
+      classList.add('open');
+    } else {
+      classList.remove('open');
+    }
+  }
+
   public get isOnline() {
     return this.hub.isConnected.value;
   }
 
-  @HostListener('click', ['$event'])
-  onClick(event: Event) {
-    if ((event.target as HTMLElement).id === 'close-button' || !this.isOpen) {
-      this.nativeElement.classList.toggle('open');
-    }
-  }
+  dismissChat() {
+    // this.modalService.openModal2(new AlertModal());
 
-  onSubmit(event: Event) {
+    this.nativeElement.classList.remove('open');
+    alert('closed');
+    this.hub.stopConnection().then(() => {
+    });
+  }
+  onSubmit() {
     if (this.message !== '') {
       this.hub.broadcastMessage(this.message);
-
     }
   }
 
 
   ngOnInit() {
-    this.nativeElement.classList.toggle('open');
     this.hub = new HubFactory('chat').createConnection(ChatHubConnection);
     // fix me, have to call it in every HubComponent
     this.registerOnMethods();
@@ -54,7 +65,6 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
     }, error => {
       console.log(error);
     });
-
   }
 
   ngOnDestroy() {

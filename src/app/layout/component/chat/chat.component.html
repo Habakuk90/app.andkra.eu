@@ -1,14 +1,22 @@
 <div class="chat">
   <ng-template #collapsed>
-    <div class="chat__small">
-      Status: <span class="icon-status">{{isOnline}}</span>
+    <div class="chat--collapsed" (click)="isOpen = true">
+      <div class="chat__dismiss" (click)="dismissChat()" id="close-chat">
+        <span class="icon-close">X</span>
+        <p>
+            Dismiss the chat forever, you wont be able to join the chat any more. You will have to reload in order to reconecct
+        </p>
+      </div>
+      <div>
+        Status: <span class="icon-status">{{isOnline}}</span>
+      </div>
     </div>
   </ng-template>
 
-  <div class="chat__open" *ngIf="isOpen;else collapsed">
+  <div class="chat--expanded" *ngIf="isOpen; else collapsed">
     <div class="icon-bar">
-        <span class="icon-close" id="close-button">X</span>
-        <span></span>
+      <span class="icon-close" (click)="isOpen = false" id="collapse-chat">X</span>
+      <span></span>
     </div>
     <div class="chat__message-box">
       <ol>
@@ -17,12 +25,10 @@
         </li>
       </ol>
     </div>
-    <div class="chat__input">
-          <form id="search" (ngSubmit)="onSubmit(form)" novalidate #form='ngForm'>
-              <input class="a-input" type="text" name="message" id="message-input"
-              [value]="message" (input)="message = $event.target.value" />
-              <input id="message-submit" type="submit" value="" />
-          </form>
-    </div>
+    <form id="search" (ngSubmit)="onSubmit(form)" novalidate #form='ngForm'>
+      <input class="a-input" type="text" name="message" id="message-input" [value]="message"
+        (input)="message = $event.target.value" />
+      <input id="message-submit" type="submit" value="" />
+    </form>
   </div>
 </div>
