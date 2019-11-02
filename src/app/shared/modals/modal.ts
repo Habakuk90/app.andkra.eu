@@ -89,7 +89,7 @@ export class AlertModal extends Modal {
     const button2 = new Button();
     button2.text = 'Cancel';
     button2.className = 'a-button--decline';
-    button2.onClick = (event: any) => console.log('cancel');
+    button2.onClick = (event: any) => console.log(event);
 
     (this.buttons as IButton[]).push(button2);
   }

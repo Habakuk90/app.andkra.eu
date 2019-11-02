@@ -1,7 +1,7 @@
 export interface IButton {
   text: string;
   className: string;
-  onClick(func: (event: Event) => void): void;
+  onClick(func: () => void): void;
 }
 
 export class Button implements IButton {
@@ -27,7 +27,7 @@ export class Button implements IButton {
     this._className = value;
   }
 
-  onClick(func: (event: Event) => void): void {
-    func(event);
+  onClick(func: () => void): void {
+    func();
   }
 }
