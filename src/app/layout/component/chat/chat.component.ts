@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, OnDestroy, OnChanges } from '@angular/co
 import { HubComponent } from 'src/app/connections/base.hubconnection';
 import { ChatHubConnection } from 'src/app/connections/chat.hubconnection';
 import { HubFactory } from 'src/app/connections/hub.factory';
-import { AlertModal, IModal2, ModalBuilder } from 'src/app/shared/modals/modal';
 import { ModalService } from 'src/app/shared/modals/modal.service';
 
 @Component({
