@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   signalR: {
-    baseUrl: 'http://localhost:8000/api/',
+    baseUrl: 'http://localhost:8080/api/',
   },
   ghost: {
     baseUrl: 'http://blog.andkra.eu/',
