@@ -39,9 +39,9 @@ export abstract class BaseHubConnection implements IBaseHubConnection {
   protected getConnection(): HubConnection {
     return this.connection;
   }
-public getId(): string {
-return this.connection.connectionId;
-}
+  public getId(): string {
+    return this.connection.connectionId;
+  }
   public async startConnection(): Promise<void> {
     try {
       await this.connection.start();
