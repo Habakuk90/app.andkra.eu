@@ -1,9 +1,12 @@
 // TODOANDI: research if possible without these imports in angular component
 @import '../../../styles/variables';
 @import '../../../styles/0base/colors';
+@import '0base/mixins';
 
 // fixme evaluate refactor into atomic design
 .modal {
+  $this: &;
+
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -11,13 +14,17 @@
   background-color: rgba(0,0,0,0.4);
 
   &__container {
+    min-width: 450px;
     position: fixed;
     top: 50%;
     left: 50%;
-    padding: 20px;
     transform: translate(-50%, -50%);
     box-shadow: $simple-box-shadow;
     background-color: $white;
+
+    > div {
+      width: 100%;
+    }
   }
 
   &__close-container {
@@ -27,6 +34,53 @@
     position: absolute;
     right: 0;
     cursor: pointer;
+  }
+
+  &__header {
+    height: 50px;
+    width: 100%;
+    color: white;
+
+    .icon-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding-right: 6px;
+      padding-top: 3px;
+
+      @include icon("\f410") {
+        font-size: 20px;
+      };
+    }
+  }
+
+  &__content {
+    min-height: 200px;
+  }
+
+  &__button-wrapper {
+    margin-bottom: 15px;
+    text-align: center;
+
+    button {
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  &.-alert {
+    #{$this}__header {
+      background-color: $color-main-complement;
+
+      .icon-alert {
+        padding-left: 10px;
+
+        @include icon("\f071") {
+          font-size: 40px;
+        }
+      }
+    }
   }
 }
 

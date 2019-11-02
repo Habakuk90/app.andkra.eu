@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ModalService } from './modal.service';
 import { Subscription } from 'rxjs';
-import { Modal, Modals } from './modal';
-import { HomeHubConnection, ChallengeResponse } from 'src/app/connections/home.hubconnection';
+import { HomeHubConnection } from 'src/app/connections/home.hubconnection';
 import { HubService } from 'src/app/connections/hub.service';
+import { IModal } from './modal';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
-  activeModal = new Modal(Modals.empty, {});
+export class ModalComponent implements OnInit, OnDestroy {
+  activeModal: IModal;
   activeModalSubscription: Subscription;
-  modals = Modals;
   selectedGame: string;
 
   constructor(private modalService: ModalService, private hubService: HubService) {
+
   }
 
   ngOnInit() {
@@ -26,17 +26,24 @@ export class ModalComponent implements OnInit {
       });
   }
 
-  onChallengeResponse(status: any) {
-    const hub: HomeHubConnection = this.hubService.getByType(HomeHubConnection.prototype);
-    // const hub: HomeHubConnection = this.hubService.getByName('homehub');
+  ngOnDestroy() {
+    this.activeModalSubscription.unsubscribe();
+  }
 
-    const resp: ChallengeResponse =
-      new ChallengeResponse(this.activeModal.args.enemyUserName, 'tictactoe', status);
+  // onChallengeResponse(status: any) {
+  //   const hub: HomeHubConnection = this.hubService.getByType(HomeHubConnection.prototype);
+  //   // const hub: HomeHubConnection = this.hubService.getByName('homehub');
 
-    if (hub.isConnected.value) {
-      // hub.challengeResponse(resp);
-      this.modalService.closeModal();
-    }
+  //   // const resp: ChallengeResponse =
+  //   //   new ChallengeResponse(this.activeModal.args.enemyUserName, 'tictactoe', status);
+
+  //   if (hub.isConnected.value) {
+  //     this.modalService.closeModal();
+  //   }
+  // }
+
+  closeModal() {
+    this.modalService.closeModal();
   }
 
   gameRestart() {
