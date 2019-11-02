@@ -1,4 +1,10 @@
-export interface IButton {
+interface IModalElement {
+
+}
+export class ModalElement implements IModalElement {
+
+}
+export interface IButton extends IModalElement {
   text: string;
   className: string;
   onClick(func: () => void): void;
@@ -29,5 +35,32 @@ export class Button implements IButton {
 
   onClick(func: () => void): void {
     func();
+  }
+}
+
+
+export interface IHeader extends IModalElement {
+  type: string;
+  icon: string;
+}
+
+export class ModalHeader implements IHeader {
+  private _type: string;
+  private _icon: string;
+
+  public get type(): string {
+    return this._type;
+  }
+
+  public set type(value: string) {
+    this._type = value;
+  }
+
+  public get icon(): string {
+    return this._icon;
+  }
+
+  public set icon(value: string) {
+    this._icon = value;
   }
 }

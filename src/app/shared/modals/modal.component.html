@@ -1,20 +1,19 @@
-<div class="modal -{{activeModal.type}}" *ngIf="activeModal != null">
+<div class="modal" *ngIf="activeModal != null">
 
   <div class="modal__container">
-    <div class="modal__header">
-      <span class="icon-{{activeModal.type}}"></span>
+    <div class="modal__header -{{activeModal.header.type}}" >
+      <span class="icon-{{activeModal.header.icon}}"></span>
       <span class="icon-close" (click)="closeModal()"></span>
     </div>
 
     <div class="modal__content">
-      <span>{{activeModal.text}}</span>
-    </div>
-
-    <div class="modal__button-wrapper">
-      <button class="a-button a-button--big {{button.className}}" *ngFor="let button of activeModal.buttons"
-        (click)="button.onClick($event)">
-        {{button.text}}
-      </button>
+      <p>{{activeModal.text}}</p>
+      <div class="button-wrapper">
+        <button class="a-button a-button--big {{button.className}}" *ngFor="let button of activeModal.buttons"
+          (click)="onClick($event, button)">
+          {{button.text}}
+        </button>
+      </div>
     </div>
   </div>
 </div>

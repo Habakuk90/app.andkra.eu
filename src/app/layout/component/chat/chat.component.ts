@@ -3,7 +3,7 @@ import { HubComponent } from 'src/app/connections/base.hubconnection';
 import { ChatHubConnection } from 'src/app/connections/chat.hubconnection';
 import { HubFactory } from 'src/app/connections/hub.factory';
 import { ModalService } from 'src/app/shared/modals/modal.service';
-import { AlertModal } from 'src/app/shared/modals/modal';
+import { DecisionModal, InfoModal } from 'src/app/shared/modals/modal';
 
 @Component({
   selector: 'app-chat',
@@ -48,7 +48,7 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
     });
 
     // open new moda
-    this.modalService.openModal(new AlertModal());
+    this.modalService.openModal(new DecisionModal());
 
   }
 
@@ -71,6 +71,8 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
     }, error => {
       console.log(error);
     });
+
+    this.modalService.openModal(new InfoModal());
   }
 
   ngOnDestroy() {

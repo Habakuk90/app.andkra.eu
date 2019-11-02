@@ -1,7 +1,7 @@
 // TODOANDI: research if possible without these imports in angular component
-@import '../../../styles/variables';
-@import '../../../styles/0base/colors';
-@import '0base/mixins';
+@import "../../../styles/variables";
+@import "../../../styles/0base/colors";
+@import "0base/mixins";
 
 // fixme evaluate refactor into atomic design
 .modal {
@@ -11,7 +11,7 @@
   height: 100vh;
   position: fixed;
   top: 0;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 
   &__container {
     min-width: 450px;
@@ -41,6 +41,14 @@
     width: 100%;
     color: white;
 
+    &.-alert {
+      background-color: $color-main-complement;
+    }
+
+    &.-info {
+      background-color: $color-main-sec-2;
+    }
+
     .icon-close {
       position: absolute;
       top: 0;
@@ -48,38 +56,44 @@
       padding-right: 6px;
       padding-top: 3px;
 
-      @include icon("\f410") {
+      &::before {
         font-size: 20px;
-      };
+      }
+    }
+
+    .icon-alert, .icon-info {
+      padding-left: 10px;
+
+      &::before {
+        font-size: 40px;
+      }
     }
   }
 
   &__content {
     min-height: 200px;
-  }
+    padding: 20px;
+    display: flex;
+    flex-flow: column nowrap;
 
-  &__button-wrapper {
-    margin-bottom: 15px;
-    text-align: center;
-
-    button {
-      &:first-child {
-        margin-right: 10px;
-      }
+    p {
+      flex-grow: 1;
     }
+
   }
 
-  &.-alert {
-    #{$this}__header {
-      background-color: $color-main-complement;
+  .icon-alert {
+    @include icon("\f071");
+  }
 
-      .icon-alert {
-        padding-left: 10px;
+  .icon-info {
+    @include icon("\f05a");
+  }
 
-        @include icon("\f071") {
-          font-size: 40px;
-        }
-      }
+  .icon-close {
+    cursor: pointer;
+
+    @include icon("\f410") {
     }
   }
 }
