@@ -18,7 +18,7 @@ export class ModalBuilder {
 
 export interface IModal {
   text: string;
-  buttons: IButton | IButton[];
+  buttons: IButton[];
   header: any;
   type: string;
   init(): void;
@@ -26,13 +26,13 @@ export interface IModal {
 
 abstract class Modal implements IModal {
   private _text: string;
-  private _buttons: IButton | IButton[];
+  private _buttons: IButton[];
   private _header: any;
   abstract type: string;
   public readonly service: ModalService;
   constructor(
     initText: string = null,
-    customButtoms: IButton | IButton[] = []) {
+    customButtoms: IButton[] = []) {
     this._text = initText;
     this._buttons = customButtoms;
   }
@@ -45,11 +45,11 @@ abstract class Modal implements IModal {
     this._text = value;
   }
 
-  public get buttons(): IButton | IButton[] {
+  public get buttons(): IButton[] {
     return this._buttons;
   }
 
-  public set buttons(value: IButton | IButton[]) {
+  public set buttons(value: IButton[]) {
     this._buttons = value;
   }
 
