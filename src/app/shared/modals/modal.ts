@@ -1,4 +1,4 @@
-import { IButton, Button, IHeader, ModalHeader, ModalElement } from './buttons';
+import { IButton, Button, IHeader, ModalHeader } from './buttons';
 
 export interface IModal {
   text: string;
