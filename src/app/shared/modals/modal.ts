@@ -1,102 +1,97 @@
-import { ModalService } from './modal.service';
-import { IButton, Button } from './buttons';
-
-
-// for custom modals use this pls
-export class ModalBuilder {
-  private _text;
-  private _modal: IModal;
-
-  constructor(private modal: new (text?: string) => IModal, text: string = null) {
-    this._modal = new modal(text);
-  }
-
-  buildModal(): IModal {
-    return this._modal;
-  }
-}
+import { IButton, Button, IHeader, ModalHeader } from './buttons';
 
 export interface IModal {
   text: string;
   buttons: IButton[];
-  header: any;
-  type: string;
-  init(): void;
+  header: IHeader;
 }
 
 abstract class Modal implements IModal {
-  private _text: string;
-  private _buttons: IButton[];
-  private _header: any;
-  abstract type: string;
-  public readonly service: ModalService;
+  public text: string;
+  public buttons: IButton[];
+  public header: IHeader;
+
   constructor(
     initText: string = null,
     customButtoms: IButton[] = []) {
-    this._text = initText;
-    this._buttons = customButtoms;
+
+    this.buttons = this.addButtons();
+    this.header = this.addHeader();
+    this.text = this.addText();
   }
 
-  public get text(): string {
-    return this._text;
-  }
+  abstract addButtons(): IButton[];
 
-  public set text(value: string) {
-    this._text = value;
-  }
+  abstract addHeader(): IHeader;
 
-  public get buttons(): IButton[] {
-    return this._buttons;
-  }
-
-  public set buttons(value: IButton[]) {
-    this._buttons = value;
-  }
-
-
-  public get header(): any {
-    return this._header;
-  }
-
-  public set header(value: any) {
-    this._header = value;
-  }
-
-  abstract init(): void;
+  abstract addText(): string;
 }
 
-export class AlertModal extends Modal {
-  type = 'alert';
+export class DecisionModal extends Modal {
+
   constructor() {
     super();
-
-    this.init();
   }
 
-  init() {
-    this.initButtons();
-    this.initText();
+  addHeader(): IHeader {
+    const header = new ModalHeader();
+
+    header.type = 'alert';
+    header.icon = 'alert';
+
+    return header;
   }
 
-  public initButtons() {
+  addButtons(): IButton[] {
+    const buttons: IButton[] = [];
+
     const button = new Button();
     button.text = 'OK';
     button.className = 'a-button--accept';
     button.onClick = (event: any) => console.log('ok');
 
-    (this.buttons as IButton[]).push(button);
+    buttons.push(button);
 
     const button2 = new Button();
     button2.text = 'Cancel';
     button2.className = 'a-button--decline';
     button2.onClick = (event: any) => console.log(event);
+    buttons.push(button2);
 
-    (this.buttons as IButton[]).push(button2);
+    return buttons;
   }
 
-  initText() {
-    if (!this.text) {
-      this.text = 'This is a sample alert';
-    }
+  addText(): string {
+    return 'This is a sample alert';
+  }
+}
+
+export class InfoModal extends Modal {
+  constructor() {
+    super();
+  }
+
+  addHeader(): IHeader {
+    const header = new ModalHeader();
+    header.type = 'info';
+    header.icon = 'info';
+
+    return header;
+  }
+
+  addButtons(): IButton[] {
+    const buttons: IButton[] = [];
+    const button = new Button();
+    button.text = 'OK';
+    button.className = 'a-button--accept';
+    button.onClick = (event: any) => console.log('ok');
+
+    buttons.push(button);
+
+    return buttons;
+  }
+
+  addText() {
+    return 'This is a sample info';
   }
 }

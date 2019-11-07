@@ -33,6 +33,10 @@
 .button-wrapper {
     text-align:center;
     margin-top: 20px;
+
+    > button:not(:first-child) {
+      margin-left: 10px;
+    }
 }
 
 /* Buttons END */
