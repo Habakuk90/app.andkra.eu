@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ModalService } from './modal.service';
 import { Subscription } from 'rxjs';
-import { HomeHubConnection } from 'src/app/connections/home.hubconnection';
 import { HubService } from 'src/app/connections/hub.service';
 import { IModal } from './modal';
 import { IButton } from './buttons';
