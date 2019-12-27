@@ -12,7 +12,6 @@ import { BlogPageComponent } from '../blog/page/blog-page/blog-page.component';
     declarations: [
         HomeComponent,
         SelectPlayerComponent,
-        BlogPageComponent
     ],
     imports: [
         SharedModule,

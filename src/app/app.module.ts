@@ -10,7 +10,7 @@ import { HeaderComponent } from './layout/content-layout/header/header.component
 import { FooterComponent } from './layout/content-layout/footer/footer.component';
 import { PageNotFoundComponent } from './layout/content-layout/page-not-found/page-not-found.component';
 import { ModalModule } from './shared/modals/modal.module';
-import { ChatComponent } from './layout/component/chat/chat.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,6 @@ import { ChatComponent } from './layout/component/chat/chat.component';
     FooterComponent,
     PageNotFoundComponent,
     AuthLayoutComponent,
-    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +28,8 @@ import { ChatComponent } from './layout/component/chat/chat.component';
     SharedModule,
 
     AppRoutingModule,
-    ModalModule
+    ModalModule,
+    BrowserAnimationsModule
   ],
   providers: [
   ],

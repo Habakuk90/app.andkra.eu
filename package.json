@@ -1,5 +1,5 @@
 {
-  "name": "tic-tac-toe-app",
+  "name": "app.andkra.eu",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
@@ -13,16 +13,19 @@
   },
   "dependencies": {
     "@angular/animations": "^8.0.0",
+    "@angular/cdk": "~8.2.3",
     "@angular/common": "^8.0.0",
     "@angular/compiler": "^8.0.0",
     "@angular/core": "^8.0.0",
     "@angular/forms": "^8.0.0",
     "@angular/http": "^7.2.15",
+    "@angular/material": "^8.2.3",
     "@angular/platform-browser": "^8.0.0",
     "@angular/platform-browser-dynamic": "^8.0.0",
     "@angular/router": "^8.0.0",
     "@aspnet/signalr": "^3.0.0-preview6.19307.2",
     "core-js": "^3.1.3",
+    "hammerjs": "^2.0.8",
     "prismjs": "^1.17.1",
     "rxjs": "^6.5.2",
     "tslib": "^1.9.0",

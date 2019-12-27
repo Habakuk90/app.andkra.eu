@@ -1,23 +1,24 @@
-<div class="chat" *ngIf="!isDismissed">
+<div class="chat" *ngIf="!isDismissed" cdkDragBoundary="body" cdkDrag>
+  <div class="icon-bar" *ngIf="isOpen" cdkDragHandle>
+    <span class="icon-minimize" (click)="minimizeChat($event)"></span>
+    <span class="icon-maximize" (click)="maximizeChat($event)" ></span>
+    <span class="icon-close" (click)="closeChat($event)" id="collapse-chat"></span>
+  </div>
   <ng-template #collapsed>
-    <div class="chat--collapsed" (click)="isOpen = true">
-      <div class="chat__dismiss" (click)="dismissChat($event)" id="close-chat">
+    <div class="chat--collapsed" (click)="openChat($event)">
+      <!-- <div class="chat__dismiss" (click)="dismissChat($event)" id="close-chat">
         <span class="icon-close"></span>
         <p>
             Dismiss the chat forever, you wont be able to join the chat any more. You will have to reload in order to reconecct
         </p>
-      </div>
-      <div>
+      </div> -->
+      <!-- <div>
         Status: <span class="icon-status">{{isOnline}}</span>
-      </div>
+      </div> -->
     </div>
   </ng-template>
 
   <div class="chat--expanded" *ngIf="isOpen; else collapsed">
-    <div class="icon-bar">
-      <span class="icon-close" (click)="isOpen = false" id="collapse-chat"></span>
-      <span></span>
-    </div>
     <div class="chat__message-box">
       <ol>
         <li *ngFor="let item of history; trackById">

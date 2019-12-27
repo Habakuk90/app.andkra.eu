@@ -33,8 +33,8 @@ export class HomeComponent implements OnInit, OnDestroy, HubComponent {
   ngOnInit() {
     this.slug$ = this.route.paramMap.pipe(map(params => (params.get('slug'))));
     this.slug$.pipe(take(1)).subscribe(slug => this.get(slug));
-
   }
+
   get(slug: string): void {
     const that = this;
 
