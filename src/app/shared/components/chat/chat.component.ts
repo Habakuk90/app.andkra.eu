@@ -1,9 +1,9 @@
-import { Component, OnInit, ElementRef, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { HubComponent } from 'src/app/connections/base.hubconnection';
 import { ChatHubConnection } from 'src/app/connections/chat.hubconnection';
+import { ModalService } from '../../modals/modal.service';
+import { InfoModal, DecisionModal } from '../../modals/modal';
 import { HubFactory } from 'src/app/connections/hub.factory';
-import { ModalService } from 'src/app/shared/modals/modal.service';
-import { DecisionModal, InfoModal } from 'src/app/shared/modals/modal';
 
 @Component({
   selector: 'app-chat',
@@ -38,6 +38,7 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
   }
 
   isDismissed = false;
+
   dismissChat(event: Event) {
     // prevent opening chat
     event.stopPropagation();
@@ -52,9 +53,29 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
 
   }
 
-  onSubmit() {
+  closeChat(event: Event) {
+    this.isOpen = false;
+  }
+
+  openChat(event: Event) {
+    this.isOpen = true;
+  }
+
+  maximizeChat(event: Event) {
+    console.log('maximized');
+  }
+
+  minimizeChat(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    console.log('minimized');
+  }
+
+  onSubmit(form) {
     if (this.message !== '') {
-      this.hub.broadcastMessage(this.message);
+      this.hub.broadcastMessage(this.message).then(() => {
+        this.message = '';
+      });
     }
   }
 
@@ -71,8 +92,6 @@ export class ChatComponent implements OnInit, OnDestroy, HubComponent {
     }, error => {
       console.log(error);
     });
-
-    this.modalService.openModal(new InfoModal());
   }
 
   ngOnDestroy() {

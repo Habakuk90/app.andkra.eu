@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { GhostHtmlComponent } from '../module/blog/component/ghost-html/ghost-html.component';
-
-// import { MaterialModule } from './material.module';
+import { ChatComponent } from './components/chat/chat.component';
+import { MaterialModule } from './material.module';
 
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -81,15 +81,17 @@ import { GhostHtmlComponent } from '../module/blog/component/ghost-html/ghost-ht
     // FontAwesomeModule
   ],
   declarations: [
-    GhostHtmlComponent
+    GhostHtmlComponent,
+    ChatComponent
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    GhostHtmlComponent
-    // MaterialModule,
+    GhostHtmlComponent,
+    ChatComponent,
+    MaterialModule,
 
     // NgbModule,
     // FontAwesomeModule,
