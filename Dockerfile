@@ -1,32 +1,29 @@
 ### STAGE 1: Build ###
 
 # We label our stage as ‘builder’
-FROM node:10.11.0-alpine as builder
+FROM node:13.5.0-alpine as builder
 
-COPY package.json .
+ADD package.json /tmp/package.json
+ADD package-lock.json /tmp/package-lock.json
 
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
-
-RUN mkdir /ng-app
-#&& mv -R ./node_modules ./ng-app
+RUN cd /tmp && npm install
+RUN mkdir -p /ng-app && cp -a /tmp/node_modules /ng-app
 
 WORKDIR /ng-app
 
-COPY . .
-
-RUN npm install
+ADD . /ng-app
 
 # setting TravisCI environment variable via docker build --build-args key=${GHOST_API_KEY}
 ARG key
 ENV GHOST_API_KEY=$key
 
 ## Build the angular app in production mode and store the artifacts in dist folder
-RUN $(npm bin)/ng build --aot --prod
-
+RUN $(npm bin)/ng build --prod --no-progress
 
 ### STAGE 2: Setup ###
 
-FROM nginx:1.13.3-alpine
+FROM nginx:latest
 
 ## Copy our default nginx config
 COPY /nginx/default.conf /etc/nginx/conf.d/
@@ -35,6 +32,6 @@ COPY /nginx/default.conf /etc/nginx/conf.d/
 RUN rm -rf /usr/share/nginx/html/*
 
 ## From ‘builder’ stage copy over the artifacts in dist folder to default nginx public folder
-COPY --from=builder /ng-app/dist/TicTacToe-app /usr/share/nginx/html
+COPY --from=builder /ng-app/dist/app-andkra-eu /usr/share/nginx/html
 
 CMD ["nginx", "-g", "daemon off;"]

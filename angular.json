@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "TicTacToe-app": {
+    "app-andkra-eu": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -20,7 +20,7 @@
             "customWebpackConfig": {
               "path": "extra-webpack.config.js"
             },
-            "outputPath": "dist/TicTacToe-app",
+            "outputPath": "dist/app-andkra-eu",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,18 +69,18 @@
             "customWebpackConfig": {
               "path": "extra-webpack.config.js"
             },
-            "browserTarget": "TicTacToe-app:build"
+            "browserTarget": "app-andkra-eu:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "TicTacToe-app:build:production"
+              "browserTarget": "app-andkra-eu:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "TicTacToe-app:build"
+            "browserTarget": "app-andkra-eu:build"
           }
         },
         "test": {
@@ -131,7 +131,7 @@
         }
       }
     },
-    "TicTacToe-app-e2e": {
+    "app-andkra-eu-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -139,7 +139,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "TicTacToe-app:serve"
+            "devServerTarget": "app-andkra-eu:serve"
           }
         },
         "lint": {
@@ -154,5 +154,5 @@
       }
     }
   },
-  "defaultProject": "TicTacToe-app"
+  "defaultProject": "app-andkra-eu"
 }
